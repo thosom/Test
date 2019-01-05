@@ -1,16 +1,46 @@
-using MoonSharp.Interpreter
+using System;
+using System.Collections.Generic;
+using GamePieces;
+using MoonSharp.Interpreter;
 
 namespace LuaObjects
 {
     [MoonSharpUserData]
-    public class LuaRobot : Target
+    public class LuaRobot
     {
+        public Robot myRobot;
+        public Player currentPlayer;
+
+        public LuaRobot(Robot myRobot, Player currentPlayer)
+        {
+            this.myRobot = myRobot;
+            this.currentPlayer = currentPlayer;
+        }
+
+
+        public bool isMine()
+        {
+            return myRobot.myPlayer == currentPlayer.myPlayer;
+        }
+
+        public bool isEnemy()
+        {
+            return !isMine();
+        }
+        
+        
+        
+        
+        
+        
+        
+        
         public bool move(int x, int y)
         {
             throw new NotImplementedException();
         }
         
-        public List<System.object> getTargets()
+        public List<object> getTargets()
         {
             throw new NotImplementedException();
         }
@@ -40,7 +70,7 @@ namespace LuaObjects
             throw new NotImplementedException();
         }
         
-        public System.object closestTarget()
+        public object closestTarget()
         {
             throw new NotImplementedException();
         }
@@ -55,9 +85,11 @@ namespace LuaObjects
             throw new NotImplementedException();
         }
 
-        public List<int> position()
+        public DynValue position()
         {
+            int x, y;
             throw new NotImplementedException();
+            return DynValue.NewTuple(DynValue.NewNumber(x),DynValue.NewNumber(y));
         }
 
         public int id()
@@ -68,3 +100,14 @@ namespace LuaObjects
         
     }
 }
+
+
+
+
+
+
+
+
+
+
+
